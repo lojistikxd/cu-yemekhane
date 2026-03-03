@@ -3,6 +3,15 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 const iconv = require('iconv-lite');
+const { createClient } = require('@supabase/supabase-js');
+const { Resend } = require('resend');
+
+const SUPABASE_URL = 'https://qulpvvhpysahsybkhcnv.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
+const RESEND_KEY = process.env.RESEND_KEY;
+
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+const resend = new Resend(RESEND_KEY);
 
 async function scrapeMenu() {
   try {
@@ -37,11 +46,8 @@ async function scrapeMenu() {
         const title = $(yemekEl).attr('title') || '';
         const kaloriMatch = $(yemekEl).text().match(/(\d+)\s*Kalori/i);
         const kalori = kaloriMatch ? kaloriMatch[1] : '';
-        
-        // Yemek adını title'dan al (örn: "3.03.2026 - Etli Nohut")
         const adMatch = title.match(/\d+\.\d+\.\d+\s*-\s*(.+)/);
         const ad = adMatch ? adMatch[1].trim() : '';
-        
         if (ad && ad.length > 1) {
           yemekler.push({ ad, kalori });
         }
@@ -65,10 +71,79 @@ async function scrapeMenu() {
       'utf8'
     );
 
-    console.log('Başarıyla kaydedildi!');
+    console.log('Menü kaydedildi!');
+
+    // Bildirim gönder
+    await bildirimGonder(menuData);
 
   } catch (error) {
     console.error('Hata:', error.message);
+  }
+}
+
+async function bildirimGonder(menuData) {
+  try {
+    console.log('Bildirimler kontrol ediliyor...');
+
+    // Bugünün tarihini al
+    const bugun = new Date();
+    const bugunStr = `${bugun.getFullYear()}-${String(bugun.getMonth()+1).padStart(2,'0')}-${String(bugun.getDate()).padStart(2,'0')}`;
+
+    const bugunMenu = menuData[bugunStr];
+    if (!bugunMenu || bugunMenu.ogle.length === 0) {
+      console.log('Bugün menü yok, bildirim gönderilmedi.');
+      return;
+    }
+
+    const bugunYemekler = bugunMenu.ogle.map(y => y.ad.toLowerCase());
+    console.log('Bugünün yemekleri:', bugunYemekler);
+
+    // Supabase'den tüm bildirimleri çek
+    const { data: bildirimler } = await db.from('bildirimler').select('*');
+    if (!bildirimler || bildirimler.length === 0) {
+      console.log('Kayıtlı bildirim yok.');
+      return;
+    }
+
+    for (const bildirim of bildirimler) {
+      const favori = bildirim.yemek_adi.toLowerCase();
+      const eslesti = bugunYemekler.some(y => y.includes(favori) || favori.includes(y.split(' ')[0]));
+
+      if (eslesti) {
+        console.log(`${bildirim.eposta} adresine bildirim gönderiliyor: ${bildirim.yemek_adi}`);
+        
+        const yemekListesi = bugunMenu.ogle.map(y => 
+          `<li><strong>${y.ad}</strong> ${y.kalori ? `- ${y.kalori} kcal` : ''}</li>`
+        ).join('');
+
+        await resend.emails.send({
+          from: 'onboarding@resend.dev',
+          to: bildirim.eposta,
+          subject: `🍽️ Bugün ${bildirim.yemek_adi} var! - ÇÜ Yemekhane`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto;">
+              <div style="background: #C8102E; padding: 20px; text-align: center; border-radius: 12px 12px 0 0;">
+                <h1 style="color: white; margin: 0; font-size: 22px;">ÇÜ Yemekhane</h1>
+                <p style="color: rgba(255,255,255,0.8); margin: 5px 0 0;">Çukurova Üniversitesi</p>
+              </div>
+              <div style="background: #FDF0F2; padding: 20px; border-radius: 0 0 12px 12px;">
+                <h2 style="color: #C8102E;">🎉 Favori yemeğin bugün var!</h2>
+                <p>Merhaba! Favori yemeğin <strong>${bildirim.yemek_adi}</strong> bugün menüde!</p>
+                <h3 style="color: #333;">Bugünün Menüsü:</h3>
+                <ul style="line-height: 2;">${yemekListesi}</ul>
+                <a href="https://cu-yemekhane.vercel.app" style="display: inline-block; background: #C8102E; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-top: 10px;">Menüyü Gör →</a>
+              </div>
+            </div>
+          `
+        });
+
+        console.log(`✅ ${bildirim.eposta} adresine gönderildi!`);
+      }
+    }
+
+    console.log('Bildirimler tamamlandı!');
+  } catch (error) {
+    console.error('Bildirim hatası:', error.message);
   }
 }
 
