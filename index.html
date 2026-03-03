@@ -5,36 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ÇÜ Yemekhane</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root {
-    --red: #C8102E;
-    --red-dark: #8B0B1F;
-    --red-light: #FDF0F2;
-    --cream: #FAF8F5;
-    --dark: #1C1C1C;
-    --mid: #6B6B6B;
-    --border: #E5E0D8;
-    --white: #FFFFFF;
-    --green: #1E7A45;
-    --gold: #B8943A;
+    --red: #C8102E; --red-dark: #8B0B1F; --red-light: #FDF0F2;
+    --cream: #FAF8F5; --dark: #1C1C1C; --mid: #6B6B6B;
+    --border: #E5E0D8; --white: #FFFFFF; --green: #1E7A45; --gold: #B8943A;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); min-height: 100vh; }
-
-  header {
-    background: var(--red);
-    height: 60px;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem;
-    position: sticky; top: 0; z-index: 200;
-    box-shadow: 0 3px 16px rgba(200,16,46,0.35);
-  }
+  header { background: var(--red); height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; position: sticky; top: 0; z-index: 200; box-shadow: 0 3px 16px rgba(200,16,46,0.35); }
   .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .logo-circle {
-    width: 36px; height: 36px; background: white; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-weight: 900; font-size: 14px; color: var(--red);
-  }
+  .logo-circle { width: 36px; height: 36px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 14px; color: var(--red); }
   .logo-text { color: white; }
   .logo-text strong { display: block; font-size: 14px; font-weight: 600; line-height: 1.1; }
   .logo-text small { font-size: 11px; font-weight: 300; opacity: 0.8; }
@@ -42,13 +24,11 @@
   .chip { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: white; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
   .btn-outline-white { background: transparent; border: 1.5px solid rgba(255,255,255,0.6); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
   .btn-outline-white:hover { background: white; color: var(--red); }
-
   .hero { background: linear-gradient(160deg, var(--red-dark) 0%, var(--red) 100%); padding: 3rem 2rem 2.5rem; text-align: center; color: white; position: relative; overflow: hidden; }
   .hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px; background: var(--cream); clip-path: ellipse(55% 100% at 50% 100%); }
   .hero::before { content: '🍽️'; position: absolute; font-size: 180px; opacity: 0.05; right: -20px; top: -20px; line-height: 1; }
   .hero h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; margin-bottom: 6px; }
   .hero p { font-size: 14px; opacity: 0.8; font-weight: 300; }
-
   .week-tabs { display: flex; gap: 6px; padding: 1.5rem 2rem 0; overflow-x: auto; scrollbar-width: none; justify-content: center; flex-wrap: wrap; }
   .week-tabs::-webkit-scrollbar { display: none; }
   .day-tab { display: flex; flex-direction: column; align-items: center; padding: 10px 16px; border-radius: 12px; cursor: pointer; border: 1.5px solid var(--border); background: white; transition: all 0.2s; min-width: 72px; user-select: none; }
@@ -60,28 +40,25 @@
   .day-tab .day-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; line-height: 1; margin: 2px 0; }
   .day-tab .day-month { font-size: 10px; opacity: 0.6; }
   .day-tab.active .day-month { opacity: 0.8; }
-
   .main { max-width: 800px; margin: 0 auto; padding: 1.5rem 2rem 4rem; }
-
   .section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; margin-top: 0.5rem; }
   .section-label h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
   .section-label .day-full { background: var(--red-light); color: var(--red); font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
-
   .meal-section { margin-bottom: 1.2rem; }
   .meal-type-header { display: flex; align-items: center; gap: 8px; margin-bottom: 0.7rem; }
   .meal-type-header .meal-icon { font-size: 18px; }
   .meal-type-header h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--mid); }
   .meal-type-header .divider { flex: 1; height: 1px; background: var(--border); }
-
   .food-grid { display: flex; flex-direction: column; gap: 8px; }
   .food-card { background: white; border-radius: 14px; border: 1.5px solid var(--border); padding: 14px 16px; display: flex; align-items: center; gap: 14px; transition: all 0.2s; }
   .food-card:hover { border-color: var(--red); box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-1px); }
   .food-emoji { font-size: 32px; flex-shrink: 0; width: 48px; text-align: center; }
   .food-info { flex: 1; min-width: 0; }
   .food-name { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
-  .food-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .food-tags { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
   .tag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
   .tag-cal { background: #FFF3E0; color: #E65100; }
+  .tag-puan { background: var(--red-light); color: var(--red); }
   .food-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .rating-row { display: flex; gap: 3px; }
   .star { font-size: 16px; cursor: pointer; transition: transform 0.1s; color: #DDD; line-height: 1; }
@@ -90,11 +67,9 @@
   .fav-btn { background: none; border: 1.5px solid var(--border); border-radius: 10px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: all 0.2s; }
   .fav-btn:hover { border-color: var(--red); background: var(--red-light); }
   .fav-btn.active { border-color: var(--red); background: var(--red-light); }
-
   .no-menu-card { background: white; border-radius: 14px; border: 1.5px dashed var(--border); padding: 2rem; text-align: center; color: var(--mid); }
   .no-menu-card .icon { font-size: 40px; margin-bottom: 10px; }
   .no-menu-card p { font-size: 14px; }
-
   .calorie-bar { background: white; border: 1.5px solid var(--border); border-radius: 16px; padding: 16px 20px; margin-top: 1.5rem; display: flex; align-items: center; gap: 16px; }
   .calorie-bar .icon { font-size: 28px; }
   .calorie-bar .info h4 { font-size: 13px; color: var(--mid); font-weight: 500; margin-bottom: 2px; }
@@ -104,48 +79,42 @@
   .meter-track { height: 8px; background: var(--border); border-radius: 10px; overflow: hidden; }
   .meter-fill { height: 100%; background: linear-gradient(to right, var(--green), var(--gold), var(--red)); border-radius: 10px; transition: width 0.5s; }
   .meter-label { display: flex; justify-content: space-between; margin-top: 4px; font-size: 10px; color: var(--mid); }
-
-  .notify-banner { background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%); border-radius: 20px; padding: 24px; margin-top: 2rem; color: white; display: flex; gap: 20px; align-items: center; }
+  .notify-banner { background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%); border-radius: 20px; padding: 24px; margin-top: 2rem; color: white; display: flex; gap: 20px; align-items: flex-start; }
   .notify-banner .nb-icon { font-size: 40px; flex-shrink: 0; }
   .notify-banner h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
   .notify-banner p { font-size: 13px; opacity: 0.7; line-height: 1.5; }
-  .notify-banner .nb-action { margin-top: 12px; display: flex; gap: 8px; }
-  .input-email { flex: 1; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: white; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; transition: border 0.2s; }
-  .input-email::placeholder { opacity: 0.4; color: white; }
-  .input-email:focus { border-color: rgba(255,255,255,0.5); }
+  .notify-banner .nb-action { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .input-text { flex: 1; min-width: 140px; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: white; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; transition: border 0.2s; }
+  .input-text::placeholder { opacity: 0.4; color: white; }
+  .input-text:focus { border-color: rgba(255,255,255,0.5); }
   .btn-notify { background: var(--red); color: white; border: none; padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; white-space: nowrap; }
   .btn-notify:hover { background: var(--red-dark); }
-
+  .notify-success { background: rgba(30,122,69,0.3); border: 1px solid rgba(30,122,69,0.5); border-radius: 10px; padding: 8px 14px; font-size: 13px; margin-top: 8px; display: none; }
   .comments-section { margin-top: 2rem; }
   .comments-section h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
   .comment-input-row { display: flex; gap: 10px; margin-bottom: 1rem; align-items: flex-start; }
   .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--red); color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-  .comment-input { flex: 1; border: 1.5px solid var(--border); background: white; padding: 10px 14px; border-radius: 12px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; resize: none; transition: border 0.2s; min-height: 44px; }
+  .comment-input-wrap { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .name-input { border: 1.5px solid var(--border); background: white; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; transition: border 0.2s; }
+  .name-input:focus { border-color: var(--red); }
+  .comment-input { border: 1.5px solid var(--border); background: white; padding: 10px 14px; border-radius: 12px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; resize: none; transition: border 0.2s; min-height: 44px; }
   .comment-input:focus { border-color: var(--red); }
-  .btn-yorum { background: var(--red); color: white; border: none; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 6px; }
+  .btn-yorum { background: var(--red); color: white; border: none; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; align-self: flex-end; }
   .comment-card { display: flex; gap: 10px; margin-bottom: 12px; }
   .comment-body { flex: 1; background: white; border-radius: 12px; border: 1.5px solid var(--border); padding: 12px 14px; }
   .comment-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
   .comment-author { font-size: 13px; font-weight: 600; }
   .comment-time { font-size: 11px; color: var(--mid); }
   .comment-text { font-size: 13px; line-height: 1.6; }
-  .like-btn { background: none; border: none; cursor: pointer; font-size: 12px; color: var(--mid); display: flex; align-items: center; gap: 4px; margin-top: 6px; padding: 0; font-family: 'DM Sans', sans-serif; transition: color 0.2s; }
-  .like-btn:hover { color: var(--red); }
-
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--dark); color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 500; opacity: 0; transition: opacity 0.3s; z-index: 999; pointer-events: none; }
+  .toast.show { opacity: 1; }
   .loading { text-align: center; padding: 3rem; color: var(--mid); font-size: 14px; }
-
   footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 1.5rem; font-size: 12px; line-height: 1.8; }
   footer strong { color: rgba(255,255,255,0.8); }
-
   @media (max-width: 600px) {
-    header { padding: 0 1rem; }
-    .chip { display: none; }
-    .hero h1 { font-size: 1.7rem; }
-    .main { padding: 1.2rem 1rem 3rem; }
-    .week-tabs { padding: 1.2rem 1rem 0; }
-    .notify-banner { flex-direction: column; }
-    .calorie-bar { flex-wrap: wrap; }
-    .food-actions { flex-direction: column; gap: 6px; }
+    header { padding: 0 1rem; } .chip { display: none; } .hero h1 { font-size: 1.7rem; }
+    .main { padding: 1.2rem 1rem 3rem; } .week-tabs { padding: 1.2rem 1rem 0; }
+    .notify-banner { flex-direction: column; } .calorie-bar { flex-wrap: wrap; } .food-actions { flex-direction: column; gap: 6px; }
   }
 </style>
 </head>
@@ -177,33 +146,37 @@
     <h2>Günün Menüsü</h2>
     <span class="day-full" id="selectedDay"></span>
   </div>
-
   <div id="menuContent" class="loading">⏳ Menü yükleniyor...</div>
 
   <div class="notify-banner">
     <div class="nb-icon">🔔</div>
     <div style="flex:1">
       <h3>Favori Yemeğin Çıkınca Haber Al</h3>
-      <p>Favori yemeğin menüde olduğu gün sabahı sana e-posta gönderelim.</p>
+      <p>Favori yemeğini ve e-posta adresini yaz, o yemek menüde olduğu gün sana haber verelim!</p>
       <div class="nb-action">
-        <input type="email" class="input-email" placeholder="eposta@cu.edu.tr">
-        <button class="btn-notify">Kayıt Ol</button>
+        <input type="text" class="input-text" id="favYemek" placeholder="Favori yemeğin (örn: Etli Nohut)">
+        <input type="email" class="input-text" id="favEposta" placeholder="E-posta adresin">
+        <button class="btn-notify" onclick="bildirimKaydet()">Kayıt Ol</button>
       </div>
+      <div class="notify-success" id="notifySuccess">✅ Kaydedildi! Favori yemeğin çıkınca haber vereceğiz.</div>
     </div>
   </div>
 
   <div class="comments-section">
-    <h3>Yorumlar</h3>
+    <h3>💬 Yorumlar</h3>
     <div class="comment-input-row">
-      <div class="avatar">?</div>
-      <div style="flex:1">
+      <div class="avatar" id="commentAvatar">?</div>
+      <div class="comment-input-wrap">
+        <input type="text" class="name-input" id="commentName" placeholder="Adın (örn: Ahmet)" oninput="updateAvatar()">
         <textarea class="comment-input" id="commentText" placeholder="Bu günün yemeği hakkında ne düşünüyorsun?"></textarea>
-        <button class="btn-yorum" onclick="addComment()">Gönder</button>
+        <button class="btn-yorum" onclick="addComment()">Gönder 💬</button>
       </div>
     </div>
     <div id="commentsList"></div>
   </div>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <footer>
   <strong>ÇÜ Yemekhane</strong> · Çukurova Üniversitesi<br>
@@ -211,188 +184,154 @@
 </footer>
 
 <script>
+  const SUPABASE_URL = 'https://qulpvvhpysahsybkhcnv.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_mufWW6ZD2OLvjY-cFB7mlw_w8lQurh6';
+  const { createClient } = supabase;
+  const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
   const DAYS = ['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'];
   const MONTHS = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
   const FOOD_EMOJIS = {
-    'köfte': '🥩', 'tavuk': '🍗', 'balık': '🐟', 'nohut': '🫘', 'fasulye': '🫘',
-    'pilav': '🍚', 'bulgur': '🌾', 'çorba': '🍲', 'salata': '🥗', 'yoğurt': '🥛',
-    'ayran': '🥛', 'meyve': '🍎', 'elma': '🍎', 'portakal': '🍊', 'armut': '🍐',
-    'muz': '🍌', 'tatlı': '🍮', 'puding': '🍮', 'kadayıf': '🍯', 'komposto': '🍵',
-    'turşu': '🥒', 'cacık': '🥣', 'şalgam': '🫙', 'bezelye': '🫛', 'sote': '🥘',
-    'kebab': '🥙', 'kavurma': '🥩', 'haşlama': '🍖', 'izgara': '🔥'
+    'köfte':'🥩','tavuk':'🍗','balık':'🐟','nohut':'🫘','fasulye':'🫘',
+    'pilav':'🍚','bulgur':'🌾','çorba':'🍲','salata':'🥗','yoğurt':'🥛',
+    'ayran':'🥛','meyve':'🍎','elma':'🍎','portakal':'🍊','armut':'🍐',
+    'muz':'🍌','tatlı':'🍮','puding':'🍮','kadayıf':'🍯','komposto':'🍵',
+    'turşu':'🥒','cacık':'🥣','şalgam':'🫙','bezelye':'🫛','sote':'🥘',
+    'kebab':'🥙','kavurma':'🥩','haşlama':'🍖','izgara':'🔥'
   };
 
-  let menuData = {};
-  let selectedDate = '';
+  let menuData = {}, selectedDate = '', puanlarCache = {};
   let favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
-  let ratings = JSON.parse(localStorage.getItem('ratings') || '{}');
-  let comments = JSON.parse(localStorage.getItem('comments') || '{}');
 
   function getEmoji(name) {
     const lower = name.toLowerCase();
-    for (const [key, emoji] of Object.entries(FOOD_EMOJIS)) {
-      if (lower.includes(key)) return emoji;
-    }
+    for (const [k,v] of Object.entries(FOOD_EMOJIS)) { if (lower.includes(k)) return v; }
     return '🍽️';
   }
-
-  function toDateStr(d) {
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  }
-
+  function toDateStr(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
   function getWeekDays(ref) {
-    const dow = ref.getDay();
-    const monday = new Date(ref);
-    monday.setDate(ref.getDate() - ((dow + 6) % 7));
-    return Array.from({length:5}, (_,i) => { const d = new Date(monday); d.setDate(monday.getDate()+i); return d; });
+    const dow = ref.getDay(), monday = new Date(ref);
+    monday.setDate(ref.getDate() - ((dow+6)%7));
+    return Array.from({length:5},(_,i)=>{ const d=new Date(monday); d.setDate(monday.getDate()+i); return d; });
+  }
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+  function updateAvatar() {
+    const n = document.getElementById('commentName').value.trim();
+    document.getElementById('commentAvatar').textContent = n ? n[0].toUpperCase() : '?';
   }
 
   async function loadMenu() {
-    try {
-      const res = await fetch('/public/data/menu.json?v=' + Date.now());
-      menuData = await res.json();
-    } catch(e) {
-      menuData = {};
-    }
+    try { const r = await fetch('/public/data/menu.json?v='+Date.now()); menuData = await r.json(); }
+    catch(e) { menuData = {}; }
     init();
   }
 
   function init() {
     const today = new Date();
-    document.getElementById('headerDate').textContent = DAYS[today.getDay()] + ', ' + today.getDate() + ' ' + MONTHS[today.getMonth()];
-
+    document.getElementById('headerDate').textContent = DAYS[today.getDay()]+', '+today.getDate()+' '+MONTHS[today.getMonth()];
     const weekDays = getWeekDays(today);
     const tabsEl = document.getElementById('weekTabs');
     tabsEl.innerHTML = '';
-
     let defaultDate = toDateStr(today);
-    if (!menuData[defaultDate]) {
-      // En yakın menüsü olan günü bul
-      for (const d of weekDays) {
-        const ds = toDateStr(d);
-        if (menuData[ds]) { defaultDate = ds; break; }
-      }
-    }
-
+    if (!menuData[defaultDate]) { for (const d of weekDays) { const ds=toDateStr(d); if(menuData[ds]){defaultDate=ds;break;} } }
     weekDays.forEach(d => {
-      const ds = toDateStr(d);
-      const hasMenu = !!menuData[ds];
-      const isSelected = ds === defaultDate;
-      const tab = document.createElement('div');
-      tab.className = 'day-tab' + (isSelected ? ' active' : '') + (!hasMenu ? ' no-menu' : '');
-      tab.innerHTML = `<span class="day-name">${DAYS[d.getDay()]}</span><span class="day-num">${d.getDate()}</span><span class="day-month">${MONTHS[d.getMonth()]}</span>`;
-      tab.addEventListener('click', () => {
-        if (!hasMenu) return;
-        document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        renderMenu(ds, d);
-      });
+      const ds=toDateStr(d), hasMenu=!!menuData[ds], isSelected=ds===defaultDate;
+      const tab=document.createElement('div');
+      tab.className='day-tab'+(isSelected?' active':'')+((!hasMenu)?' no-menu':'');
+      tab.innerHTML=`<span class="day-name">${DAYS[d.getDay()]}</span><span class="day-num">${d.getDate()}</span><span class="day-month">${MONTHS[d.getMonth()]}</span>`;
+      tab.addEventListener('click',()=>{ if(!hasMenu)return; document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); renderMenu(ds,d); });
       tabsEl.appendChild(tab);
     });
-
-    const defaultDay = weekDays.find(d => toDateStr(d) === defaultDate) || today;
+    const defaultDay = weekDays.find(d=>toDateStr(d)===defaultDate)||today;
     renderMenu(defaultDate, defaultDay);
   }
 
-  function renderMenu(dateStr, dateObj) {
-    selectedDate = dateStr;
-    document.getElementById('selectedDay').textContent = DAYS[dateObj.getDay()] + ', ' + dateObj.getDate() + ' ' + MONTHS[dateObj.getMonth()];
+  async function getPuanlar(dateStr) {
+    const {data} = await db.from('puanlar').select('yemek_id,puan').eq('tarih',dateStr);
+    const result={};
+    if(data){ const g={}; data.forEach(r=>{if(!g[r.yemek_id])g[r.yemek_id]=[]; g[r.yemek_id].push(r.puan);}); Object.keys(g).forEach(k=>{const a=g[k]; result[k]=Math.round(a.reduce((x,y)=>x+y,0)/a.length);}); }
+    return result;
+  }
 
+  async function renderMenu(dateStr, dateObj) {
+    selectedDate = dateStr;
+    document.getElementById('selectedDay').textContent = DAYS[dateObj.getDay()]+', '+dateObj.getDate()+' '+MONTHS[dateObj.getMonth()];
     const content = document.getElementById('menuContent');
     const dayMenu = menuData[dateStr];
-
-    if (!dayMenu || dayMenu.ogle.length === 0) {
-      content.innerHTML = `<div class="no-menu-card"><div class="icon">🗓️</div><p>Bu gün için menü henüz girilmemiş.</p></div>`;
-      renderComments(dateStr);
-      return;
-    }
-
-    const totalKalori = dayMenu.ogle.reduce((s, y) => s + (parseInt(y.kalori) || 0), 0);
-    const pct = Math.min((totalKalori / 2000) * 100, 100);
-
-    let html = `<div class="meal-section">
-      <div class="meal-type-header"><span class="meal-icon">☀️</span><h3>Öğle Yemeği</h3><div class="divider"></div></div>
-      <div class="food-grid">`;
-
-    dayMenu.ogle.forEach((yemek, i) => {
-      const favKey = dateStr + '_' + i;
-      const isFav = favorites[favKey];
-      const rating = ratings[favKey] || 0;
-      const emoji = getEmoji(yemek.ad);
-      html += `<div class="food-card">
+    if(!dayMenu||dayMenu.ogle.length===0){ content.innerHTML=`<div class="no-menu-card"><div class="icon">🗓️</div><p>Bu gün için menü henüz girilmemiş.</p></div>`; renderComments(dateStr); return; }
+    puanlarCache = await getPuanlar(dateStr);
+    const totalKal = dayMenu.ogle.reduce((s,y)=>s+(parseInt(y.kalori)||0),0);
+    const pct = Math.min((totalKal/2000)*100,100);
+    let html=`<div class="meal-section"><div class="meal-type-header"><span class="meal-icon">☀️</span><h3>Öğle Yemeği</h3><div class="divider"></div></div><div class="food-grid">`;
+    dayMenu.ogle.forEach((yemek,i)=>{
+      const favKey=dateStr+'_'+i, isFav=favorites[favKey], rating=puanlarCache[i]||0, emoji=getEmoji(yemek.ad);
+      html+=`<div class="food-card">
         <div class="food-emoji">${emoji}</div>
         <div class="food-info">
           <div class="food-name">${yemek.ad}</div>
-          <div class="food-tags">${yemek.kalori ? `<span class="tag tag-cal">${yemek.kalori} kcal</span>` : ''}</div>
+          <div class="food-tags">${yemek.kalori?`<span class="tag tag-cal">${yemek.kalori} kcal</span>`:''} ${rating>0?`<span class="tag tag-puan">★ ${rating}/5</span>`:''}</div>
         </div>
         <div class="food-actions">
-          <div class="rating-row">${[1,2,3,4,5].map(s => `<span class="star ${s <= rating ? 'filled' : ''}" onclick="rate('${favKey}', ${s}, this)">★</span>`).join('')}</div>
-          <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav('${favKey}', this)">${isFav ? '❤️' : '🤍'}</button>
+          <div class="rating-row">${[1,2,3,4,5].map(s=>`<span class="star ${s<=rating?'filled':''}" onclick="rate('${dateStr}',${i},${s},this)">★</span>`).join('')}</div>
+          <button class="fav-btn ${isFav?'active':''}" onclick="toggleFav('${favKey}','${yemek.ad.replace(/'/g,"\\'")}',this)">${isFav?'❤️':'🤍'}</button>
         </div>
       </div>`;
     });
-
-    html += `</div></div>
-    <div class="calorie-bar">
-      <div class="icon">🔥</div>
-      <div class="info"><h4>Toplam Kalori</h4><strong>~${totalKalori} <span>kcal</span></strong></div>
-      <div class="calorie-meter">
-        <div class="meter-track"><div class="meter-fill" style="width:${pct}%"></div></div>
-        <div class="meter-label"><span>0</span><span>Önerilen 2.000 kcal</span></div>
-      </div>
-    </div>`;
-
+    html+=`</div></div><div class="calorie-bar"><div class="icon">🔥</div><div class="info"><h4>Toplam Kalori</h4><strong>~${totalKal} <span>kcal</span></strong></div><div class="calorie-meter"><div class="meter-track"><div class="meter-fill" style="width:${pct}%"></div></div><div class="meter-label"><span>0</span><span>Önerilen 2.000 kcal</span></div></div></div>`;
     content.innerHTML = html;
     renderComments(dateStr);
   }
 
-  function toggleFav(key, btn) {
-    favorites[key] = !favorites[key];
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    btn.classList.toggle('active');
-    btn.textContent = favorites[key] ? '❤️' : '🤍';
+  function toggleFav(key, yemekAdi, btn) {
+    favorites[key]=!favorites[key]; localStorage.setItem('favorites',JSON.stringify(favorites));
+    btn.classList.toggle('active'); btn.textContent=favorites[key]?'❤️':'🤍';
+    showToast(favorites[key]?`❤️ ${yemekAdi} favorilere eklendi!`:`💔 Favorilerden çıkarıldı`);
   }
 
-  function rate(key, val, star) {
-    ratings[key] = val;
-    localStorage.setItem('ratings', JSON.stringify(ratings));
-    const row = star.closest('.rating-row');
-    row.querySelectorAll('.star').forEach((s, i) => s.classList.toggle('filled', i < val));
+  async function rate(dateStr, yemekId, val, star) {
+    await db.from('puanlar').insert({tarih:dateStr, yemek_id:String(yemekId), puan:val});
+    const row=star.closest('.rating-row');
+    row.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('filled',i<val));
+    showToast('⭐ Puanın kaydedildi, teşekkürler!');
   }
 
-  function renderComments(dateStr) {
-    const list = document.getElementById('commentsList');
-    const dayComments = comments[dateStr] || [];
-    if (dayComments.length === 0) { list.innerHTML = '<p style="font-size:13px;color:var(--mid);padding:1rem 0">Henüz yorum yok, ilk yorumu sen yaz!</p>'; return; }
-    list.innerHTML = dayComments.map(c => `
-      <div class="comment-card">
-        <div class="avatar" style="background:${c.color}">${c.initial}</div>
-        <div class="comment-body">
-          <div class="comment-meta"><span class="comment-author">${c.author}</span><span class="comment-time">${c.time}</span></div>
-          <div class="comment-text">${c.text}</div>
-        </div>
-      </div>`).join('');
+  async function renderComments(dateStr) {
+    const list=document.getElementById('commentsList');
+    list.innerHTML='<p style="font-size:13px;color:var(--mid);padding:0.5rem 0">Yorumlar yükleniyor...</p>';
+    const {data}=await db.from('yorumlar').select('*').eq('tarih',dateStr).order('created_at',{ascending:false});
+    if(!data||data.length===0){ list.innerHTML='<p style="font-size:13px;color:var(--mid);padding:1rem 0">Henüz yorum yok, ilk yorumu sen yaz! 😊</p>'; return; }
+    const colors=['#C8102E','#1E7A45','#B8943A','#1565C0','#6A1B9A'];
+    list.innerHTML=data.map((c,idx)=>`<div class="comment-card"><div class="avatar" style="background:${colors[idx%colors.length]}">${c.yazar?c.yazar[0].toUpperCase():'?'}</div><div class="comment-body"><div class="comment-meta"><span class="comment-author">${c.yazar||'Anonim'}</span><span class="comment-time">${c.saat||''}</span></div><div class="comment-text">${c.yorum}</div></div></div>`).join('');
   }
 
-  function addComment() {
-    const text = document.getElementById('commentText').value.trim();
-    if (!text) return;
-    if (!comments[selectedDate]) comments[selectedDate] = [];
-    const colors = ['#C8102E','#1E7A45','#B8943A','#1565C0','#6A1B9A'];
-    comments[selectedDate].push({
-      author: 'Misafir',
-      initial: 'M',
-      color: colors[Math.floor(Math.random()*colors.length)],
-      text,
-      time: new Date().toLocaleTimeString('tr-TR', {hour:'2-digit',minute:'2-digit'})
-    });
-    localStorage.setItem('comments', JSON.stringify(comments));
-    document.getElementById('commentText').value = '';
+  async function addComment() {
+    const text=document.getElementById('commentText').value.trim();
+    const name=document.getElementById('commentName').value.trim()||'Anonim';
+    if(!text){showToast('Lütfen bir yorum yaz!');return;}
+    const now=new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+    await db.from('yorumlar').insert({tarih:selectedDate,yazar:name,yorum:text,saat:now});
+    document.getElementById('commentText').value='';
+    showToast('✅ Yorumun eklendi!');
     renderComments(selectedDate);
+  }
+
+  async function bildirimKaydet() {
+    const yemek=document.getElementById('favYemek').value.trim();
+    const eposta=document.getElementById('favEposta').value.trim();
+    if(!yemek||!eposta){showToast('Lütfen tüm alanları doldur!');return;}
+    if(!eposta.includes('@')){showToast('Geçerli bir e-posta gir!');return;}
+    await db.from('bildirimler').insert({yemek_adi:yemek,eposta});
+    document.getElementById('favYemek').value='';
+    document.getElementById('favEposta').value='';
+    document.getElementById('notifySuccess').style.display='block';
+    showToast('🔔 Bildirim kaydedildi!');
   }
 
   loadMenu();
 </script>
 </body>
 </html>
-<!-- v2 -->
