@@ -1,0 +1,11 @@
+{
+  "name": "cu-yemekhane",
+  "version": "1.0.0",
+  "scripts": {
+    "scrape": "node scripts/scrape.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0"
+  }
+}
