@@ -2,6 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
+const iconv = require('iconv-lite');
 
 async function scrapeMenu() {
   try {
@@ -17,19 +18,14 @@ async function scrapeMenu() {
       }
     });
 
-    // Windows-1254 encoding düzelt
-    const iconv = require('iconv-lite');
     const html = iconv.decode(Buffer.from(response.data), 'windows-1254');
     const $ = cheerio.load(html);
-
     const menuData = {};
 
-    // Her gün bloğunu çek
     $('div.col-md-2, div.col-md-3').each((i, el) => {
       const baslik = $(el).find('a').first().text().trim();
       if (!baslik || !baslik.includes('.')) return;
 
-      // Tarihi parse et (örn: "3.03.2026")
       const tarihMatch = baslik.match(/(\d+\.\d+\.\d+)/);
       if (!tarihMatch) return;
 
@@ -38,24 +34,21 @@ async function scrapeMenu() {
 
       const yemekler = [];
       $(el).find('ul li a').each((j, yemekEl) => {
-        const yemekText = $(yemekEl).text().trim();
-        const satirlar = yemekText.split('\n').map(s => s.trim()).filter(Boolean);
-        if (satirlar.length >= 1) {
-          const ad = satirlar[0].replace(/\d+\s*Kalori/i, '').trim();
-          const kaloriMatch = yemekText.match(/(\d+)\s*Kalori/);
-          const kalori = kaloriMatch ? kaloriMatch[1] : '';
-          if (ad && ad.length > 1) {
-            yemekler.push({ ad, kalori });
-          }
+        const title = $(yemekEl).attr('title') || '';
+        const kaloriMatch = $(yemekEl).text().match(/(\d+)\s*Kalori/i);
+        const kalori = kaloriMatch ? kaloriMatch[1] : '';
+        
+        // Yemek adını title'dan al (örn: "3.03.2026 - Etli Nohut")
+        const adMatch = title.match(/\d+\.\d+\.\d+\s*-\s*(.+)/);
+        const ad = adMatch ? adMatch[1].trim() : '';
+        
+        if (ad && ad.length > 1) {
+          yemekler.push({ ad, kalori });
         }
       });
 
       if (yemekler.length > 0) {
-        menuData[tarih] = {
-          sabah: [],
-          ogle: yemekler,
-          aksam: []
-        };
+        menuData[tarih] = { sabah: [], ogle: yemekler, aksam: [] };
       }
     });
 
@@ -72,7 +65,7 @@ async function scrapeMenu() {
       'utf8'
     );
 
-    console.log('Menü başarıyla kaydedildi!');
+    console.log('Başarıyla kaydedildi!');
 
   } catch (error) {
     console.error('Hata:', error.message);
