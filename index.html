@@ -308,10 +308,31 @@
     list.innerHTML=data.map((c,idx)=>`<div class="comment-card"><div class="avatar" style="background:${colors[idx%colors.length]}">${c.yazar?c.yazar[0].toUpperCase():'?'}</div><div class="comment-body"><div class="comment-meta"><span class="comment-author">${c.yazar||'Anonim'}</span><span class="comment-time">${c.saat||''}</span></div><div class="comment-text">${c.yorum}</div></div></div>`).join('');
   }
 
+  const YASAK=[
+    'sik','siki','sikik','sikim','orospu','orospucocugu','fahise','kaltak','surtuk','kahpe','oc','amk','amina','amcik','got','gotu','ibne','pust','yarrak','yarak',
+    'pic','piclik','salak','aptal','gerizekal','gerzek','mal','dangalak','bok','boktan','pezevenk','gavat','kopek','esek','katir','domuz',
+    'oldururum','keserim','geberir','gebertir','patlatir','vururum',
+    'anani','anana','anasini','babani','babana','haysiyetsiz','serefsiz','alcak','namussuz',
+    'allahsiz','imansiz','dinsiz','gavur','hain','terorist','boluc','satilmis'
+  ];
+  const SPAM_PAT=[/(.)\1{4,}/,/http|www\.|\.com/i];
+
+  function icerikKontrol(text){
+    const lower=text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[*@#!]/g,'');
+    for(const k of YASAK){if(lower.includes(k))return{uygun:false,sebep:'Uygunsuz icerik tespit edildi!'};}
+    for(const p of SPAM_PAT){if(p.test(text))return{uygun:false,sebep:'Bu yorum spam olarak algilandi!'};}
+    if(text.length<3)return{uygun:false,sebep:'Yorum cok kisa!'};
+    const h=text.replace(/[^a-zA-ZgusıocGUSIOC]/g,'');
+    if(h.length>5&&h===h.toUpperCase())return{uygun:false,sebep:'Lutfen buyuk harf kullanma!'};
+    return{uygun:true};
+  }
+
   async function addComment() {
     const text=document.getElementById('commentText').value.trim();
     const name=document.getElementById('commentName').value.trim()||'Anonim';
-    if(!text){showToast('Lütfen bir yorum yaz!');return;}
+    if(!text){showToast('Lutfen bir yorum yaz!');return;}
+    const kontrol=icerikKontrol(text);
+    if(!kontrol.uygun){showToast('⚠️ '+kontrol.sebep);return;}
     const now=new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
     await db.from('yorumlar').insert({tarih:selectedDate,yazar:name,yorum:text,saat:now});
     document.getElementById('commentText').value='';
