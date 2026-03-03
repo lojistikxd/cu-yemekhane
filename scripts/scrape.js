@@ -88,6 +88,8 @@ async function bildirimGonder(menuData) {
     // Bugünün tarihini al
     const bugun = new Date(new Date().toLocaleString('tr-TR', {timeZone: 'Europe/Istanbul'}));
     const bugunStr = `${bugun.getFullYear()}-${String(bugun.getMonth()+1).padStart(2,'0')}-${String(bugun.getDate()).padStart(2,'0')}`;
+    console.log('Bugün tarihi:', bugunStr);
+    console.log('Menüde olan tarihler:', Object.keys(menuData));
 
     const bugunMenu = menuData[bugunStr];
     if (!bugunMenu || bugunMenu.ogle.length === 0) {
