@@ -41,7 +41,7 @@ async function scrapeMenu() {
         const yemekText = $(yemekEl).text().trim();
         const satirlar = yemekText.split('\n').map(s => s.trim()).filter(Boolean);
         if (satirlar.length >= 1) {
-          const ad = satirlar[0];
+          const ad = satirlar[0].replace(/\d+\s*Kalori/i, '').trim();
           const kaloriMatch = yemekText.match(/(\d+)\s*Kalori/);
           const kalori = kaloriMatch ? kaloriMatch[1] : '';
           if (ad && ad.length > 1) {
