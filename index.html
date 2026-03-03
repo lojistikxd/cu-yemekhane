@@ -249,7 +249,7 @@
 
   async function loadMenu() {
     try {
-      cconst res = await fetch('public/data/menu.json?v=' + Date.now());
+      const res = await fetch('/public/data/menu.json?v=' + Date.now());
       menuData = await res.json();
     } catch(e) {
       menuData = {};
