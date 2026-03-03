@@ -326,7 +326,13 @@
     if(h.length>5&&h===h.toUpperCase())return{uygun:false,sebep:'Lutfen buyuk harf kullanma!'};
     return{uygun:true};
   }
-
+  function yorumHakkiKontrol(dateStr) {
+    const key = 'yorum_' + dateStr;
+    return !localStorage.getItem(key);
+  }
+  function yorumHakkiKullan(dateStr) {
+    localStorage.setItem('yorum_' + dateStr, '1');
+  }
   async function addComment() {
     const text=document.getElementById('commentText').value.trim();
     const name=document.getElementById('commentName').value.trim()||'Anonim';
@@ -335,9 +341,11 @@
     if(!adKontrol.uygun){showToast('⚠️ Ad kısmında uygunsuz içerik!');return;}
     const kontrol=icerikKontrol(text);
     if(!kontrol.uygun){showToast('⚠️ '+kontrol.sebep);return;}
+    if(!yorumHakkiKontrol(selectedDate)){showToast('⚠️ Bu gün için zaten yorum yaptın!');return;}
     const now=new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
     await db.from('yorumlar').insert({tarih:selectedDate,yazar:name,yorum:text,saat:now});
     document.getElementById('commentText').value='';
+    yorumHakkiKullan(selectedDate);
     showToast('✅ Yorumun eklendi!');
     renderComments(selectedDate);
   }
