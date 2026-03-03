@@ -331,6 +331,8 @@
     const text=document.getElementById('commentText').value.trim();
     const name=document.getElementById('commentName').value.trim()||'Anonim';
     if(!text){showToast('Lutfen bir yorum yaz!');return;}
+    const adKontrol=icerikKontrol(name);
+    if(!adKontrol.uygun){showToast('⚠️ Ad kısmında uygunsuz içerik!');return;}
     const kontrol=icerikKontrol(text);
     if(!kontrol.uygun){showToast('⚠️ '+kontrol.sebep);return;}
     const now=new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
