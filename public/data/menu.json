@@ -1,444 +1,4 @@
 {
-  "2026-03-09": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Soslu Dalyan Köfte",
-        "kalori": "246"
-      },
-      {
-        "ad": "Şehriyeli Bulgur Pilavı",
-        "kalori": "352"
-      },
-      {
-        "ad": "Yoğurt",
-        "kalori": "118"
-      },
-      {
-        "ad": "Türlü Turşu",
-        "kalori": "10"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-03": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Tavuk Izgara",
-        "kalori": "620"
-      },
-      {
-        "ad": "Mercimekli Bulgur Pilavı",
-        "kalori": "364"
-      },
-      {
-        "ad": "Ayran",
-        "kalori": "60"
-      },
-      {
-        "ad": "Puding",
-        "kalori": "215"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-04": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Etli Taze Fasulye",
-        "kalori": "262"
-      },
-      {
-        "ad": "Şehriyeli Pirinç Pilavı",
-        "kalori": "310"
-      },
-      {
-        "ad": "Yoğurt",
-        "kalori": "118"
-      },
-      {
-        "ad": "Türlü Turşu",
-        "kalori": "10"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-05": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Etli Nohut",
-        "kalori": "373"
-      },
-      {
-        "ad": "Şehriyeli Bulgur Pilavı",
-        "kalori": "352"
-      },
-      {
-        "ad": "Yoğurt",
-        "kalori": "118"
-      },
-      {
-        "ad": "Salatalık Turşusu",
-        "kalori": "7"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-06": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Fırın Balık (Uskumru)",
-        "kalori": "197"
-      },
-      {
-        "ad": "Mercimek Çorba",
-        "kalori": "244"
-      },
-      {
-        "ad": "Meyve (Portakal)",
-        "kalori": "171"
-      },
-      {
-        "ad": "Puding",
-        "kalori": "215"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-09": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Arap Tava",
-        "kalori": "234"
-      },
-      {
-        "ad": "Şehriyeli Bulgur Pilavı",
-        "kalori": "352"
-      },
-      {
-        "ad": "Şalgam",
-        "kalori": "20"
-      },
-      {
-        "ad": "Meyve (Elma)",
-        "kalori": "142"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-10": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Etli Bezelye",
-        "kalori": "390"
-      },
-      {
-        "ad": "Şehriyeli Pirinç Pilavı",
-        "kalori": "310"
-      },
-      {
-        "ad": "Yoğurt",
-        "kalori": "118"
-      },
-      {
-        "ad": "Puding",
-        "kalori": "215"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-11": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Soslu But Spesial",
-        "kalori": "620"
-      },
-      {
-        "ad": "Şehriyeli Bulgur Pilavı",
-        "kalori": "352"
-      },
-      {
-        "ad": "Ayran",
-        "kalori": "60"
-      },
-      {
-        "ad": "Meyve (Portakal)",
-        "kalori": "171"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-12": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Terbiyeli Köfte",
-        "kalori": "295"
-      },
-      {
-        "ad": "Şehriyeli Pirinç Pilavı",
-        "kalori": "310"
-      },
-      {
-        "ad": "Meyve (elma)",
-        "kalori": "142"
-      },
-      {
-        "ad": "Puding",
-        "kalori": "215"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-13": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Etli Kuru Fasulye",
-        "kalori": "340"
-      },
-      {
-        "ad": "Şehriyeli Bulgur Pilavı",
-        "kalori": "352"
-      },
-      {
-        "ad": "Yoğurt",
-        "kalori": "118"
-      },
-      {
-        "ad": "Salatalık Turşusu",
-        "kalori": "7"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-16": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Sini Köfte",
-        "kalori": "460"
-      },
-      {
-        "ad": "Şehriyeli Pirinç Pilavı",
-        "kalori": "310"
-      },
-      {
-        "ad": "Ayran",
-        "kalori": "60"
-      },
-      {
-        "ad": "Meyve (Armut)",
-        "kalori": "128"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-17": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Etli Nohut",
-        "kalori": "373"
-      },
-      {
-        "ad": "Şehriyeli Bulgur Pilavı",
-        "kalori": "352"
-      },
-      {
-        "ad": "Yoğurt",
-        "kalori": "118"
-      },
-      {
-        "ad": "Salatalık Turşusu",
-        "kalori": "7"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-18": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Tavuk Haşlama",
-        "kalori": "396"
-      },
-      {
-        "ad": "Şehriyeli Pirinç Pilavı",
-        "kalori": "310"
-      },
-      {
-        "ad": "Meyve (elma)",
-        "kalori": "142"
-      },
-      {
-        "ad": "Puding",
-        "kalori": "215"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-19": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Et Kavurma",
-        "kalori": "317"
-      },
-      {
-        "ad": "Şehriyeli Pirinç Pilavı",
-        "kalori": "310"
-      },
-      {
-        "ad": "Mercimek Çorba",
-        "kalori": "244"
-      },
-      {
-        "ad": "Şeker Pare",
-        "kalori": "595"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-20": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "İzmir Köfte",
-        "kalori": "391"
-      },
-      {
-        "ad": "Şehriyeli Bulgur Pilavı",
-        "kalori": "352"
-      },
-      {
-        "ad": "Cacık",
-        "kalori": "97"
-      },
-      {
-        "ad": "MUZ",
-        "kalori": "150"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-23": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Ekşili Köfte",
-        "kalori": "294"
-      },
-      {
-        "ad": "Şehriyeli Pirinç Pilavı",
-        "kalori": "310"
-      },
-      {
-        "ad": "Yoğurt",
-        "kalori": "118"
-      },
-      {
-        "ad": "Meyve (Armut)",
-        "kalori": "128"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-24": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Soslu Fırın Tavuk",
-        "kalori": "535"
-      },
-      {
-        "ad": "Mercimekli Bulgur Pilavı",
-        "kalori": "364"
-      },
-      {
-        "ad": "Domates Çorba",
-        "kalori": "245"
-      },
-      {
-        "ad": "Ayran",
-        "kalori": "60"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-25": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Et Kavurma",
-        "kalori": "317"
-      },
-      {
-        "ad": "Nohutlu Pirinç Pilavı",
-        "kalori": "377"
-      },
-      {
-        "ad": "Mercimek Çorba",
-        "kalori": "244"
-      },
-      {
-        "ad": "Halka Tatlı",
-        "kalori": "375"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-26": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Sini Köfte",
-        "kalori": "460"
-      },
-      {
-        "ad": "Şehriyeli Bulgur Pilavı",
-        "kalori": "352"
-      },
-      {
-        "ad": "Ayran",
-        "kalori": "60"
-      },
-      {
-        "ad": "Meyve (Armut)",
-        "kalori": "128"
-      }
-    ],
-    "aksam": []
-  },
-  "2026-02-27": {
-    "sabah": [],
-    "ogle": [
-      {
-        "ad": "Etli Kuru Fasulye",
-        "kalori": "340"
-      },
-      {
-        "ad": "Şehriyeli Pirinç Pilavı",
-        "kalori": "310"
-      },
-      {
-        "ad": "Yoğurt",
-        "kalori": "118"
-      },
-      {
-        "ad": "Türlü Turşu",
-        "kalori": "10"
-      }
-    ],
-    "aksam": []
-  },
   "2026-03-02": {
     "sabah": [],
     "ogle": [
@@ -513,10 +73,6 @@
         "kalori": "453"
       },
       {
-        "ad": "Patates Musakka (Etsiz)",
-        "kalori": "220"
-      },
-      {
         "ad": "Şehriyeli Bulgur Pilavı",
         "kalori": "352"
       },
@@ -539,16 +95,196 @@
         "kalori": "620"
       },
       {
+        "ad": "Zeytinyağlı Taze Fasülye",
+        "kalori": "153"
+      },
+      {
         "ad": "Nohutlu Pirinç Pilavı",
         "kalori": "377"
+      },
+      {
+        "ad": "Marul Salata",
+        "kalori": "93"
+      },
+      {
+        "ad": "Şalgam",
+        "kalori": "20"
+      }
+    ],
+    "aksam": []
+  },
+  "2026-03-09": {
+    "sabah": [],
+    "ogle": [
+      {
+        "ad": "Soslu Dalyan Köfte",
+        "kalori": "246"
+      },
+      {
+        "ad": "Şehriyeli Bulgur Pilavı",
+        "kalori": "352"
+      },
+      {
+        "ad": "Ayran",
+        "kalori": "60"
+      },
+      {
+        "ad": "Meyve (Elma)",
+        "kalori": "142"
+      }
+    ],
+    "aksam": []
+  },
+  "2026-03-10": {
+    "sabah": [],
+    "ogle": [
+      {
+        "ad": "Izgara Fırın Baget",
+        "kalori": "350"
+      },
+      {
+        "ad": "Şehriyeli Pirinç Pilavı",
+        "kalori": "310"
+      },
+      {
+        "ad": "Mercimek Çorba",
+        "kalori": "244"
+      },
+      {
+        "ad": "Halka Tatlı",
+        "kalori": "375"
+      }
+    ],
+    "aksam": []
+  },
+  "2026-03-11": {
+    "sabah": [],
+    "ogle": [
+      {
+        "ad": "Terbiyeli Köfte",
+        "kalori": "295"
+      },
+      {
+        "ad": "Meyhane Pilavı",
+        "kalori": "341"
       },
       {
         "ad": "Şalgam",
         "kalori": "20"
       },
       {
-        "ad": "Marul Salata",
-        "kalori": "93"
+        "ad": "Meyve (Portakal)",
+        "kalori": "171"
+      }
+    ],
+    "aksam": []
+  },
+  "2026-03-12": {
+    "sabah": [],
+    "ogle": [
+      {
+        "ad": "Et Kavurma",
+        "kalori": "317"
+      },
+      {
+        "ad": "Şehriyeli Pirinç Pilavı",
+        "kalori": "310"
+      },
+      {
+        "ad": "Domates Çorba",
+        "kalori": "245"
+      },
+      {
+        "ad": "Karakuş Tatlısı",
+        "kalori": "430"
+      }
+    ],
+    "aksam": []
+  },
+  "2026-03-13": {
+    "sabah": [],
+    "ogle": [
+      {
+        "ad": "Etli Kuru Fasulye",
+        "kalori": "340"
+      },
+      {
+        "ad": "Şehriyeli Bulgur Pilavı",
+        "kalori": "352"
+      },
+      {
+        "ad": "Yoğurt",
+        "kalori": "118"
+      },
+      {
+        "ad": "Salatalık Turşusu",
+        "kalori": "7"
+      }
+    ],
+    "aksam": []
+  },
+  "2026-03-16": {
+    "sabah": [],
+    "ogle": [
+      {
+        "ad": "Etli Taze Fasulye",
+        "kalori": "262"
+      },
+      {
+        "ad": "Şehriyeli Bulgur Pilavı",
+        "kalori": "352"
+      },
+      {
+        "ad": "Yoğurt",
+        "kalori": "118"
+      },
+      {
+        "ad": "Meyve (Armut)",
+        "kalori": "128"
+      }
+    ],
+    "aksam": []
+  },
+  "2026-03-17": {
+    "sabah": [],
+    "ogle": [
+      {
+        "ad": "İzmir Köfte",
+        "kalori": "391"
+      },
+      {
+        "ad": "Nohutlu Pirinç Pilavı",
+        "kalori": "377"
+      },
+      {
+        "ad": "Ayran",
+        "kalori": "60"
+      },
+      {
+        "ad": "Halka Tatlı",
+        "kalori": "375"
+      }
+    ],
+    "aksam": []
+  },
+  "2026-03-18": {
+    "sabah": [],
+    "ogle": [
+      {
+        "ad": "Tavuk Haşlama",
+        "kalori": "396"
+      },
+      {
+        "ad": "Mercimekli Bulgur Pilavı",
+        "kalori": "364"
+      },
+      {
+        "ad": "Ayran",
+        "kalori": "60"
+      },
+      {
+        "ad": "Salatalık Turşusu",
+        "kalori": "7"
       }
     ],
     "aksam": []
